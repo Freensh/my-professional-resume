@@ -27,10 +27,10 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Run CI Checks / Linting
-        run: |
-          echo "Running structural tests..."
-          docker run --rm -i hadolint/hadolint < Dockerfile
-          echo "Linting passed successfully."
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: error
 
       - name: Build, Tag, and Push Docker Image
         id: build-image
